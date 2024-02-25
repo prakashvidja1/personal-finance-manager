@@ -44,8 +44,5 @@ class PersonalFinanceManagerApplicationTests {
 
 		double d = 123456789123456789.98;
 		System.out.println("double : "+d);
-
-		IncomeExpenseService.SERVICE_NAME = "sadsadsa";
-		System.out.println(IncomeExpenseService.SERVICE_NAME);
 	}
 }
