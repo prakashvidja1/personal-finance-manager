@@ -3,6 +3,7 @@ package com.pf.service.impl;
 import com.pf.bean.IncomeExpenseRequestBean;
 import com.pf.bean.IncomeExpenseResponseBean;
 import com.pf.entity.IncomeExpenseEntity;
+import com.pf.enums.AmountTypeEnum;
 import com.pf.helper.IncomeExpenseHelper;
 import com.pf.repo.IncomeExpenseRepository;
 import com.pf.service.IncomeExpenseService;
@@ -45,7 +46,7 @@ public class IncomeExpenseServiceImpl implements IncomeExpenseService {
         incomeExpenseEntity.setSummary(incomeExpenseRequestBean.getSummary());
         incomeExpenseEntity.setCategory(incomeExpenseRequestBean.getCategory());
         incomeExpenseEntity.setSubCategory(incomeExpenseRequestBean.getSubCategory());
-        incomeExpenseEntity.setType(incomeExpenseRequestBean.getType());
+        incomeExpenseEntity.setType(AmountTypeEnum.getName(incomeExpenseRequestBean.getType()));
         incomeExpenseEntity.setDateTime(LocalDateTime.now());
         incomeExpenseEntity = incomeExpenseRepository.save(incomeExpenseEntity);
 
