@@ -2,6 +2,8 @@ package com.pf.controller;
 
 import com.pf.bean.IncomeExpenseRequestBean;
 import com.pf.bean.IncomeExpenseResponseBean;
+import com.pf.bean.IncomeExpenseSearchRequest;
+import com.pf.bean.IncomeExpenseSearchResponse;
 import com.pf.service.IncomeExpenseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,17 @@ public class IncomeExpenseController {
             return new ResponseEntity<>(incomeExpenseResponseBean, HttpStatus.OK);
         } catch (Exception e) {
             _log.error("Exception occurred at saveIncomeExpense : {}", e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(value = "/searchQueryByExample")
+    public ResponseEntity<IncomeExpenseSearchResponse> searchQueryByExample(@RequestBody IncomeExpenseSearchRequest incomeExpenseSearchRequest) {
+        try {
+            IncomeExpenseSearchResponse incomeExpenseSearchResponse = incomeExpenseService.searchQueryByExample(incomeExpenseSearchRequest);
+            return new ResponseEntity<>(incomeExpenseSearchResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            _log.error("Exception occurred at searchIncomeExpense : {}", e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

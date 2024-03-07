@@ -1,8 +1,9 @@
 package com.pf.helper;
 
 import com.pf.bean.IncomeExpenseResponseBean;
+import com.pf.bean.IncomeExpenseSearchResponse;
 import com.pf.entity.IncomeExpenseEntity;
-import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -22,5 +23,14 @@ public class IncomeExpenseHelper {
 
     public static List<IncomeExpenseResponseBean> getExpenseResponseBeanList(List<IncomeExpenseEntity> incomeExpenseEntityList) {
         return incomeExpenseEntityList.stream().map(IncomeExpenseHelper::getExpenseResponseBean).toList();
+    }
+
+    public static IncomeExpenseSearchResponse getIncomeExpenseSearchResponse(Page<IncomeExpenseEntity> incomeExpenseEntityPage) {
+        IncomeExpenseSearchResponse paginatedIncomeExpenseResponse = new IncomeExpenseSearchResponse();
+        paginatedIncomeExpenseResponse.setCurrentPage(incomeExpenseEntityPage.getNumber());
+        paginatedIncomeExpenseResponse.setTotalPages(incomeExpenseEntityPage.getTotalPages());
+        paginatedIncomeExpenseResponse.setTotalElements(incomeExpenseEntityPage.getTotalElements());
+        paginatedIncomeExpenseResponse.setIncomeExpenseResponseBeanList(getExpenseResponseBeanList(incomeExpenseEntityPage.getContent()));
+        return paginatedIncomeExpenseResponse;
     }
 }
